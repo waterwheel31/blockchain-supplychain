@@ -1,8 +1,6 @@
 # Blockchain for Coffee Bean Supplychain
 
 
-##
-
 ## 1. Brief Summary
 
 This is an exercise of blockchain for Udacity program. This blockchain tracks the supply chain of coffee bean from farmers to consumers.
@@ -23,10 +21,6 @@ This part should be easy! Simply add in the diagrams you create in Part A of the
 
 If libraries are used in the project, the project write-up indicates which libraries and discusses why these libraries were adopted.
 
--
--
--
-
 
 ## 4. IPFS 
 
@@ -41,8 +35,8 @@ If IPFS is used, the project write-up discusses how IPFS is used in this project
 
 ## 6. Version Info
 
-- Node:
-- Truffle:
+- Node: v10.16.0
+- Truffle: v5.0.40 (core: 5.0.40)
 - web3:  
 
 

@@ -32,23 +32,23 @@ contract RetailerRole {
 
   // Define a function 'addRetailer' that adds this role
   function addRetailer(address account) public onlyRetailer {
-    return retailers.has(account);
+    _addRetailer(account);
   }
 
   // Define a function 'renounceRetailer' to renounce this role
   function renounceRetailer() public {
-    _addRetailer(accuont);
+    _removeRetailer(msg.sender);
   }
 
   // Define an internal function '_addRetailer' to add this role, called by 'addRetailer'
   function _addRetailer(address account) internal {
     retailers.add(account);
-    emit RetailerAdded;
+    emit RetailerAdded(account);
   }
 
   // Define an internal function '_removeRetailer' to remove this role, called by 'removeRetailer'
   function _removeRetailer(address account) internal {
     retailers.remove(account);
-    emit RetailerRemoved;
+    emit RetailerRemoved(account);
   }
 }
