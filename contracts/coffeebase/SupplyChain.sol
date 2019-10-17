@@ -260,7 +260,7 @@ contract SupplyChain {
   // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
   // Use the above defined modifiers to check if the item is available for sale, if the buyer has paid enough, 
   // and any excess ether sent is refunded back to the buyer
-  function buyItem(uint _upc, uint _price) public payable 
+  function buyItem(uint _upc) public payable 
     // Call modifier to check if upc has passed previous supply chain stage
     forSaleAtFarmer(_upc)
     // Call modifer to check if buyer has paid enough
@@ -282,7 +282,7 @@ contract SupplyChain {
   // Define a function "orderItem" that allows the retailer to mark an item 'ordered'
   // 
 
-  function orderItem(uint _upc, uint _price) public payable
+  function orderItem(uint _upc) public payable
     // Call modifier to check if ups has passed previous supply chain stage
     soldAtFarmer(_upc)
     // Call modifer to check if buyer has paid enough
@@ -347,7 +347,7 @@ contract SupplyChain {
 
   // Define a function 'purchaseItem' that allows the consumer to mark an item 'Purchased'
   // Use the above modifiers to check if the item is received
-  function purchaseItem(uint _upc, uint _price) public 
+  function purchaseItem(uint _upc) public payable
     // Call modifier to check if upc has passed previous supply chain stage
     atStore(_upc)
     // Call modifer to check if buyer has paid enough
@@ -377,7 +377,8 @@ contract SupplyChain {
       string  memory originFarmName,
       string  memory originFarmInformation,
       string  memory originFarmLatitude,
-      string  memory originFarmLongitude
+      string  memory originFarmLongitude,
+      State itemState
     ) 
     {
 
@@ -390,6 +391,7 @@ contract SupplyChain {
     originFarmInformation = items[_upc].originFarmInformation;
     originFarmLatitude = items[_upc].originFarmLatitude;
     originFarmLongitude = items[_upc].originFarmLongitude;
+    itemState = items[_upc].itemState;
 
     return (
       itemSKU,
@@ -399,7 +401,8 @@ contract SupplyChain {
       originFarmName,
       originFarmInformation,
       originFarmLatitude,
-      originFarmLongitude
+      originFarmLongitude,
+      itemState
       );
     }
 
