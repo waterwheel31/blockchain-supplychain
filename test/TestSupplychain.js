@@ -44,34 +44,28 @@ contract('SupplyChain', function(accounts) {
     // 1st Test
     it("Testing smart contract function harvestItem() that allows a farmer to harvest coffee", async() => {
         const supplyChain = await SupplyChain.deployed()
-        
-        // Declare and Initialize a variable for event
-        var eventEmitted = false
-        
-        // Watch the emitted event Harvested()
-        var event = supplyChain.Harvested()
-        await event.watch((err, res) => {
-            eventEmitted = true
-        })
-
+    
         // Mark an item as Harvested by calling function harvestItem()
-        await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
+        let result = await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
         // const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
 
+        //console.log(result);
+
+
         // Verify the result set
         assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
         assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-        assert.equal(resultBufferOne[2], originFarmerID, 'Error: Missing or Invalid ownerID')
+        assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID')
         assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
         assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
         assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
         assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
         assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
-        assert.equal(resultBufferOne[8], 0, 'Error: Invalid item State')
-        assert.equal(eventEmitted, true, 'Invalid event emitted')        
+        assert.equal(resultBufferOne[8], 0, 'Error: Invalid item State')   
+        assert.equal(result.logs[0].event, "Harvested", 'Invalid event emitted')
     })    
 
     // 2nd Test
@@ -82,10 +76,12 @@ contract('SupplyChain', function(accounts) {
         var eventEmitted = false
         
         // Watch the emitted event Processed()
+        /*
         var event = supplyChain.Processed()
         await event.watch((err, res) => {
             eventEmitted = true
         })
+        */
 
         // Mark an item as Processed by calling function processtItem()
         await supplyChain.processItem(upc)
@@ -105,11 +101,13 @@ contract('SupplyChain', function(accounts) {
         // Declare and Initialize a variable for event
         var eventEmitted = false
         
+        /*
         // Watch the emitted event Packed()
         var event = supplyChain.Packed()
         await event.watch((err, res) => {
             eventEmitted = true
         })
+        */
 
         // Mark an item as Packed by calling function packItem()
         await supplyChain.packItem(upc)
@@ -129,14 +127,16 @@ contract('SupplyChain', function(accounts) {
         // Declare and Initialize a variable for event
         var eventEmitted = false
         
+        /*
         // Watch the emitted event ForSale()
         var event = supplyChain.ForSaleAtFarmer()
         await event.watch((err, res) => {
             eventEmitted = true
         })
+        */
 
         // Mark an item as ForSale by calling function sellItem()
-        await supplyChain.sellItem(upc)
+        await supplyChain.sellItem(upc, productPrice);
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
@@ -153,12 +153,13 @@ contract('SupplyChain', function(accounts) {
         // Declare and Initialize a variable for event
         var eventEmitted = false
         
+        /*
         // Watch the emitted event Sold()
         var event = supplyChain.SoldAtFarmer()
         await event.watch((err, res) => {
             eventEmitted = true
         })
-        
+        */
 
         // Mark an item as Sold by calling function buyItem()
         await supplyChain.buyItem(upc)
@@ -178,11 +179,13 @@ contract('SupplyChain', function(accounts) {
         // Declare and Initialize a variable for event
         var eventEmitted = false
         
+        /*
         // Watch the emitted event Shipped()
         var event = supplyChain.Shipped()
         await event.watch((err, res) => {
             eventEmitted = true
         })
+        */
 
         // Mark an item as Sold by calling function buyItem()
         await supplyChain.shipItem(upc)
@@ -202,11 +205,13 @@ contract('SupplyChain', function(accounts) {
         // Declare and Initialize a variable for event
         var eventEmitted = false
         
+        /*
         // Watch the emitted event Received()
         var event = supplyChain.AtStore()
         await event.watch((err, res) => {
             eventEmitted = true
         })
+        */
 
         // Mark an item as Sold by calling function buyItem()
         await supplyChain.receiveItem(upc)
@@ -226,11 +231,13 @@ contract('SupplyChain', function(accounts) {
         // Declare and Initialize a variable for event
         var eventEmitted = false
         
+        /*
         // Watch the emitted event Purchased()
         var event = supplyChain.Purchased()
         await event.watch((err, res) => {
             eventEmitted = true
         })
+        */
 
         // Mark an item as Sold by calling function buyItem()
         await supplyChain.purchaseItem(upc)

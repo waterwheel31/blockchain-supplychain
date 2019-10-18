@@ -19,8 +19,8 @@ contract SupplyChain {
   mapping (uint => string[]) itemsHistory;
   
   // Define enum 'State' with the following values:
-  enum State 
-  { 
+  enum State
+  {
     Harvested,  // 0
     Processed,  // 1
     Packed,     // 2
@@ -244,7 +244,7 @@ contract SupplyChain {
   }
 
   // Define a function 'sellItem' that allows a farmer to mark an item 'ForSale'
-  function sellItem(uint _upc, uint _price) public 
+  function sellItem(uint _upc, uint _price) public
   // Call modifier to check if upc has passed previous supply chain stage
     packed(_upc)
   // Call modifier to verify caller of this function
@@ -260,7 +260,7 @@ contract SupplyChain {
   // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
   // Use the above defined modifiers to check if the item is available for sale, if the buyer has paid enough, 
   // and any excess ether sent is refunded back to the buyer
-  function buyItem(uint _upc) public payable 
+  function buyItem(uint _upc) public payable
     // Call modifier to check if upc has passed previous supply chain stage
     forSaleAtFarmer(_upc)
     // Call modifer to check if buyer has paid enough
@@ -271,7 +271,7 @@ contract SupplyChain {
       // Transfer money to farmer
       items[_upc].farmerID.transfer(items[_upc].productPrice);
       // Update the appropriate fields - ownerID, distributorID, itemState
-      items[_upc].ownerID = msg.sender; 
+      items[_upc].ownerID = msg.sender;
       items[_upc].distributorID = msg.sender;
       items[_upc].itemState = State.SoldAtFarmer;
    
