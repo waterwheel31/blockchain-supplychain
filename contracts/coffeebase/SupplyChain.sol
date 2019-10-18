@@ -64,7 +64,7 @@ contract SupplyChain {
   event Ordered(uint upc);
   event ShippingRequested(uint upc);
   event Shipped(uint upc);
-  event Received(uint upc);
+  event AtStore(uint upc);
   event Purchased(uint upc);
 
   // Define a modifer that checks to see if msg.sender == owner of the contract
@@ -152,7 +152,7 @@ contract SupplyChain {
     require(items[_upc].itemState == State.ShippingRequested);
     _;
   }
-  
+
 
   // Define a modifier that checks if an item.state of a upc is Shipped
   modifier shipped(uint _upc) {
@@ -202,7 +202,7 @@ contract SupplyChain {
       originFarmInformation: _originFarmInformation,
       originFarmLatitude: _originFarmLatitude,
       originFarmLongitude: _originFarmLongitude,
-      productID: upc + sku, 
+      productID: upc + sku,
       productNotes: _productNotes,
       productPrice: 0,
       itemState: State.Harvested,
@@ -276,12 +276,11 @@ contract SupplyChain {
       items[_upc].itemState = State.SoldAtFarmer;
    
       // emit the appropriate event
-      emit SoldAtFarmer(_upc);
-  }
+    emit SoldAtFarmer(_upc);
+    }
 
   // Define a function "orderItem" that allows the retailer to mark an item 'ordered'
   // 
-
   function orderItem(uint _upc) public payable
     // Call modifier to check if ups has passed previous supply chain stage
     soldAtFarmer(_upc)
@@ -293,7 +292,7 @@ contract SupplyChain {
       // Transfer money to distributor
       items[_upc].distributorID.transfer(items[_upc].productPrice);
       // Update the appropriate fields - ownerID, distributorID, itemState
-      items[_upc].ownerID = msg.sender; 
+      items[_upc].ownerID = msg.sender;
       items[_upc].retailerID = msg.sender;
       items[_upc].itemState = State.Ordered;
     }
@@ -316,7 +315,7 @@ contract SupplyChain {
 
   // Define a function 'shipItem' that allows the farmer to ship 
   // Use the above modifers to check if the item is sold
-  function shipItem(uint _upc) public 
+  function shipItem(uint _upc) public
     // Call modifier to check if upc has passed previous supply chain stage
     shippingRequested(_upc)
     // Call modifier to verify caller of this function
@@ -330,18 +329,17 @@ contract SupplyChain {
 
   // Define a function 'receiveItem' that allows the retailer to mark an item 'Received'
   // Use the above modifiers to check if the item is shipped
-  function receiveItem(uint _upc) public 
+  function receiveItem(uint _upc) public
     // Call modifier to check if upc has passed previous supply chain stage
-    shippingRequested(_upc)
+    shipped(_upc)
     // Access Control List enforced by calling Smart Contract / DApp
     onlyTheRetailer(_upc)
     {
     // Update the appropriate fields - ownerID, retailerID, itemState
-      items[_upc].ownerID = msg.sender; 
-      items[_upc].retailerID = msg.sender;
-      items[_upc].itemState = State.Shipped;
+      items[_upc].ownerID = msg.sender;
+      items[_upc].itemState = State.AtStore;
     // Emit the appropriate event
-      emit Received(_upc);
+    emit AtStore(upc);
     
   }
 
