@@ -96,7 +96,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
 
         // Mark an item as Sold by calling function buyItem()
-        await supplyChain.buyItem(upc,  {value: web3.utils.toWei("2.40"), from: accounts[2]});
+        await supplyChain.buyItem(upc,  {value: web3.utils.toWei("1.1"), from: accounts[2]});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
@@ -110,7 +110,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as Sold by calling function buyItem()
-        await supplyChain.orderItem(upc,  {value:web3.utils.toWei("2.50"), from: accounts[3]})
+        await supplyChain.orderItem(upc,  {value:web3.utils.toWei("1.2"), from: accounts[3]})
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
@@ -166,7 +166,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as Sold by calling function buyItem()
-        await supplyChain.purchaseItem(upc,  {value:web3.utils.toWei("2.50"), from: accounts[4]})
+        await supplyChain.purchaseItem(upc,  {value:web3.utils.toWei("1.3"), from: accounts[4]})
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
