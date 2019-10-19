@@ -2485,9 +2485,76 @@
     "name": "solc",
     "version": "0.5.8+commit.23d335f2.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "4": {
+      "events": {
+        "0x2e0ded4123377a3c2bc9a26f1717655a129e2f20752924d42e730ec89c83dbd0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "FarmerAdded",
+          "type": "event",
+          "signature": "0x2e0ded4123377a3c2bc9a26f1717655a129e2f20752924d42e730ec89c83dbd0"
+        },
+        "0xa5e0f060af304ab17dd418c7927e3da3ae7868189bf387aee09ab179ccc572f2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "FarmerRemoved",
+          "type": "event",
+          "signature": "0xa5e0f060af304ab17dd418c7927e3da3ae7868189bf387aee09ab179ccc572f2"
+        }
+      },
+      "links": {},
+      "address": "0x03a0b7A6cb0ec1C464F1914cC88B2D75614B8AbE",
+      "transactionHash": "0x2bc77d2de91fb398bbc5c7bfe6db9b3b3908e2121bcba3fc3d5e1da6d3a738b3"
+    },
+    "5777": {
+      "events": {
+        "0x2e0ded4123377a3c2bc9a26f1717655a129e2f20752924d42e730ec89c83dbd0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "FarmerAdded",
+          "type": "event",
+          "signature": "0x2e0ded4123377a3c2bc9a26f1717655a129e2f20752924d42e730ec89c83dbd0"
+        },
+        "0xa5e0f060af304ab17dd418c7927e3da3ae7868189bf387aee09ab179ccc572f2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "FarmerRemoved",
+          "type": "event",
+          "signature": "0xa5e0f060af304ab17dd418c7927e3da3ae7868189bf387aee09ab179ccc572f2"
+        }
+      },
+      "links": {},
+      "address": "0x3378c11B0562CBAA4fEBa83dBD423d4cD60A3Afd",
+      "transactionHash": "0x552f36bc8dc4fc9dce9faa7d7de66bae87f8d84ba441153f855da41d39b56b9b"
+    }
+  },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-18T11:30:08.604Z",
+  "updatedAt": "2019-10-19T03:44:08.485Z",
   "devdoc": {
     "methods": {}
   },
