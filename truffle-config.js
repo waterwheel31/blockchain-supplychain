@@ -1,7 +1,7 @@
 
 var HDWalletProvider = require('truffle-hdwallet-provider');
 
-var mnemonic = 'wood deal board resemble proof oblige velvet affair damage pepper alien unlock';
+var mnemonic = 'spirit supply whale amount human item harsh scare congress discover talent hamster';
 
 module.exports = {
   
